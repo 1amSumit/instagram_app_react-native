@@ -7,15 +7,17 @@ import {
 } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
 import { Colors } from "../constants/Colors";
+import PrimaryButton from "../component/PrimaryButton";
 
 const Page = () => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.textContainer}>
-        <Text style={styles.mainText}>Hallo</Text>
-        <Text style={styles.subText}>there!</Text>
+        <Text style={styles.mainText}>Welcome</Text>
+        <Text style={styles.subText}>back!</Text>
         <Text style={styles.dummyText}>
           Login to get latest updates of your community around you!
         </Text>
@@ -31,13 +33,30 @@ const Page = () => {
           <TextInput style={styles.input} placeholder="Enter your Email." />
         </View>
         <View style={styles.inputContainer}>
-          <Ionicons
+          <SimpleLineIcons
             style={styles.icon}
-            name="mail-outline"
+            name="lock"
             size={24}
             color="black"
           />
           <TextInput style={styles.input} placeholder="Enter your Password." />
+        </View>
+        <View style={{ alignSelf: "flex-end" }}>
+          <Text style={{ color: Colors.blueTint }}>Forgot passowrd</Text>
+        </View>
+        <View>
+          <PrimaryButton>Sign in</PrimaryButton>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
+        >
+          <Text>Don't have an account?</Text>
+          <Text style={{ color: Colors.primaryColor }}> create an account</Text>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -67,6 +86,7 @@ const styles = StyleSheet.create({
   },
 
   dummyText: {
+    marginTop: 4,
     fontSize: 14,
     color: "#888",
   },
