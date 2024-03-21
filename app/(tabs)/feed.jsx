@@ -1,8 +1,11 @@
-import { View, Text, StyleSheet, StatusBar } from "react-native";
+import { View, Text, StyleSheet, StatusBar, FlatList } from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import RoundedStatus from "../../component/RoundedStatus";
+import ItemSeperator from "../../component/ItemSeperator";
+
+const data = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const Page = () => {
   return (
@@ -15,15 +18,14 @@ const Page = () => {
         </View>
       </View>
       <View style={styles.statusConatiner}>
-        <RoundedStatus />
-        <RoundedStatus />
-        <RoundedStatus />
-        <RoundedStatus />
-        <RoundedStatus />
-        <RoundedStatus />
-        <RoundedStatus />
-        <RoundedStatus />
-        <RoundedStatus />
+        <FlatList
+          data={data}
+          renderItem={(item) => <RoundedStatus />}
+          keyExtractor={(item, index) => index.toString()}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={ItemSeperator}
+        />
       </View>
     </View>
   );
@@ -42,12 +44,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+
   headerText: {
     fontSize: 22,
   },
+
   statusConatiner: {
     paddingHorizontal: 8,
-    flexDirection: "row",
-    gap: 6,
   },
 });
