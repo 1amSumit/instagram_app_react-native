@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
   statusContainer: {
     borderWidth: 3,
     borderColor: Colors.primaryColor,
-    borderRadius: 35,
-    width: 70,
-    height: 70,
+    borderRadius: 30,
+    width: 60,
+    height: 60,
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
   },
   text: {
-    fontSize: 14,
-    color: "#444",
+    fontSize: 12,
+    color: "#222",
   },
 });
