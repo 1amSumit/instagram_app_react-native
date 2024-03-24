@@ -6,16 +6,45 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
 import { Colors } from "../constants/Colors";
 import PrimaryButton from "../component/PrimaryButton";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "../servies/login";
 
 const Page = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState("");
+
+  const { mutate } = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (err) => {
+      setErrors("User doesn't exists with this email.");
+    },
+  });
+
+  const onSubmit = () => {
+    if (
+      email.trim().length === 0 ||
+      email.includes("@") === false ||
+      password.trim() < 7
+    ) {
+      console.log("error in inputs");
+      setErrors("Email or password incorrect!.");
+      return;
+    }
+    mutate({ email: email, password: password });
+  };
+
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.textContainer}>
@@ -24,6 +53,11 @@ const Page = () => {
         <Text style={styles.dummyText}>
           Login to get latest updates of your community around you!
         </Text>
+        {errors && (
+          <Text style={{ textAlign: "center", color: Colors.primaryColor }}>
+            {errors}
+          </Text>
+        )}
       </View>
       <View style={styles.inputsContainer}>
         <View style={styles.inputContainer}>
@@ -33,7 +67,17 @@ const Page = () => {
             size={24}
             color="black"
           />
-          <TextInput style={styles.input} placeholder="Enter your Email." />
+          <TextInput
+            value={email}
+            autoCapitalize="none"
+            autoCorrect
+            onChangeText={(text) => {
+              setEmail(text);
+              setErrors("");
+            }}
+            style={styles.input}
+            placeholder="Enter your Email."
+          />
         </View>
         <View style={styles.inputContainer}>
           <SimpleLineIcons
@@ -42,15 +86,23 @@ const Page = () => {
             size={24}
             color="black"
           />
-          <TextInput style={styles.input} placeholder="Enter your Password." />
+          <TextInput
+            value={password}
+            autoCapitalize="none"
+            autoCorrect
+            onChangeText={(text) => {
+              setPassword(text);
+              setErrors("");
+            }}
+            style={styles.input}
+            placeholder="Enter your Password."
+          />
         </View>
         <View style={{ alignSelf: "flex-end" }}>
           <Text style={{ color: Colors.blueTint }}>Forgot passowrd</Text>
         </View>
         <View>
-          <PrimaryButton onPress={() => router.replace("/feed")}>
-            Sign in
-          </PrimaryButton>
+          <PrimaryButton onPress={() => onSubmit()}>Sign in</PrimaryButton>
         </View>
         <View
           style={{
