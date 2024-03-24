@@ -4,6 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import RoundedStatus from "../../component/RoundedStatus";
 import ItemSeperator from "../../component/ItemSeperator";
+import PostImage from "../../component/PostImage";
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -24,6 +25,14 @@ const Page = () => {
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={ItemSeperator}
+        />
+      </View>
+      <View style={styles.postsContainer}>
+        <FlatList
+          data={data}
+          renderItem={(item) => <PostImage />}
+          keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeperator}
         />
       </View>
@@ -51,5 +60,7 @@ const styles = StyleSheet.create({
 
   statusConatiner: {
     paddingHorizontal: 8,
+    paddingVertical: 4,
   },
+  postsContainer: {},
 });

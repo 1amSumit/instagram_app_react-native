@@ -1,14 +1,17 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Text } from "react-native";
 import React from "react";
 import { Colors } from "../constants/Colors";
 
 const RoundedStatus = ({ image, isOwner }) => {
   return (
-    <View style={styles.statusContainer}>
-      <Image
-        style={styles.image}
-        source={require("../assets/images/favicon.png")}
-      />
+    <View style={styles.container}>
+      <View style={styles.statusContainer}>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/favicon.png")}
+        />
+      </View>
+      <Text style={styles.text}>sumit</Text>
     </View>
   );
 };
@@ -16,6 +19,10 @@ const RoundedStatus = ({ image, isOwner }) => {
 export default RoundedStatus;
 
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   statusContainer: {
     borderWidth: 3,
     borderColor: Colors.primaryColor,
@@ -30,5 +37,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: 35,
+  },
+  text: {
+    fontSize: 14,
+    color: "#444",
   },
 });
